@@ -1,16 +1,16 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
 
-export type SpiritType = {
+export type Spirit = {
   name: string;
   color: string;
 };
 
 type Data = {
-  spirit_list: SpiritType[];
+  spirit_list: Spirit[];
 };
 
-const supply_spirit_list: SpiritType[] = [
+const supply_spirit_list: Spirit[] = [
   {
     name: "vodka",
     color: "#0060f050",
@@ -25,7 +25,7 @@ const supply_spirit_list: SpiritType[] = [
   },
   {
     name: "whisky",
-    color: "#0060f050",
+    color: "#ed820220",
   },
 ];
 

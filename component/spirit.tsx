@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { SpiritType } from "../pages/api/spirit";
+import { Spirit } from "../pages/api/spirit";
 
-const Spirit: React.FC = () => {
-  const [spiritList, setSpiritList] = useState<SpiritType[]>(
-    (): SpiritType[] => {
-      return [];
-    }
-  );
+type SpiritComponentProps = {
+  colorChange: (color: string) => void;
+};
+
+const SpiritComponent: React.FC<SpiritComponentProps> = (
+  props: SpiritComponentProps
+) => {
+  const [spiritList, setSpiritList] = useState<Spirit[]>((): Spirit[] => {
+    return [];
+  });
 
   const getSpiritList = () => {
     fetch(`/api/spirit`, {
@@ -33,15 +37,24 @@ const Spirit: React.FC = () => {
     getSpiritList();
   }, []);
 
-  const spiritComponent = spiritList.map((spirit, idx) => {
-    return <li key={idx}>{spirit.name}</li>;
+  const spiritListComponent = spiritList.map((spirit, idx) => {
+    return (
+      <li
+        key={idx}
+        onClick={() => {
+          props.colorChange(spirit.color);
+        }}
+      >
+        {spirit.name}
+      </li>
+    );
   });
   return (
     <div>
       <h3>Spirit</h3>
-      <ul>{spiritComponent}</ul>
+      <ul>{spiritListComponent}</ul>
     </div>
   );
 };
 
-export default Spirit;
+export default SpiritComponent;
